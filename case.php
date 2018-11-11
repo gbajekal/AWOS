@@ -5,7 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-ob_start();
+ ob_start();
+ include 'header.php';
+
 use google\appengine\api\users\User;
 use google\appengine\api\users\UserService;
 use \google\appengine\api\mail\Message;
@@ -20,30 +22,38 @@ include_once 'dbconnection.php';
 
 if($mysqli != null)
  debugStr("Got database connection");
-$caseid = $_GET['case'];
-debugStr("Case Id =".$caseid);
+if ($_SERVER['REQUEST_METHOD'] === 'GET')
+{
+	$caseid = $_GET['case'];
+	debugStr("Case Id =".$caseid);
 
-// Get the case parameteres
-$case = getCase($mysqli, $caseid);
+	// Get the case parameteres
+	$case = getCase($mysqli, $caseid);
 
-// Display the case
-displayCase($case);
+	// Display the case
+	displayCase($case);
+	
+}
+
 
 // Check if this is a callback from the update
-if(isset($_POST["comments"]))
+else
 {
     $comments = htmlspecialchars($_POST["comments"]);
     debugStr("Comments:".$comments);
     $status   = htmlspecialchars($_POST["status"]);
     $id       = htmlspecialchars($_POST["id"]);
     $resolvedDate = date("Y-m-d H:i:s");
+    $rating = htmlspecialchars($_POST["rating"]);
+    if( ($rating == NULL) )
+        $rating = 0;
     debugStr("id:".$id);
     
     //$updateQuery = 'Update grievance set Comments ="'.$comments. '", Status="'. $status . '", Date_Resolved="'.now().'" Where id =' . $id;
     
    // debugStr("QS=".$updateQuery);
     
-    if( $mysqli->query('Update grievance set Comments ="'.$comments. '", Status="'. $status . '", Date_Resolved="'.$resolvedDate.'" Where id =' . $id) === TRUE)
+    if( $mysqli->query('Update grievance set rating ="'.$rating. '", Comments ="'.$comments. '", Status="'. $status . '", Date_Resolved="'.$resolvedDate.'" Where id =' . $id) === TRUE)
     {
          echo 'Record updated successfully';
     }    
@@ -62,7 +72,7 @@ if(isset($_POST["comments"]))
 
 
 
-echo '<br><a href=/"'."index.php". '/"> Back';
+echo '<br><a href="index.php"> Back';
 
 
 ob_end_flush();

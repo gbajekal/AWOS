@@ -1,5 +1,5 @@
 application: awos-beta
-version: 1
+version: 2
 runtime: php55
 api_version: 1
 module: default
@@ -11,8 +11,21 @@ handlers:
   script: index.php
 - url: /case.php
   script: case.php
+- url: /profile.php
+  script: profile.php
+- url: /about.php
+  script: about.php
+- url: /header.php
+  script: header.php
+- url: /classifiedForm.php
+  script: classifiedForm.php
+- url: /classifiedListing.php
+  script: classifiedListing.php
+- url: /img/smr.jpg
+  static_files: img/smr.jpg 
+  upload: img/smr.jpg
+- url: /pdf/ratecard.pdf
+  static_files: pdf/ratecard.pdf
+  upload: pdf/ratecard.pdf
 - url: /*.*
   script: index.php
-   
-  
-  

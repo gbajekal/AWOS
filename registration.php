@@ -4,6 +4,11 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<?php
+
+include 'header.php';
+?>
 <html>
     <head>
         <meta charset="UTF-8">
@@ -14,13 +19,18 @@ and open the template in the editor.
         echo '<H1>Hi '.$_SERVER['USER_NICKNAME'].', You need to Update your Profile!</H1>';
         
         echo '<form method="post" action='. $google_redirect_url.'>';
-        echo '<b>Block #</b><br>';
-        echo '<input name="block"/><br>';
-        echo '<b>Apt #</b> <br>';
-        echo '<input name="apt"/><br>';
-        echo '<b>Mobile #</b> <br>';
-        echo '<input name="mobile"/><br><br>';
-        echo '<input type="submit" value="Update">';
+        echo '<table>';
+        echo 'echo <tr><td><b>Block #</b></td></tr>';
+        echo ''echo <tr><td><input name="block"/></td></tr>';
+        echo '<tr><td><b>Apt #</b></td></tr><br>';
+        echo '<tr><td><input name="apt"/></td></tr>';
+        echo '<tr><td><b>Mobile # prefixed +91</b></td></tr>';
+        echo '<tr><td><input name="mobile"/></td></tr>';
+        echo '<tr><td></td></tr>';
+        echo '<tr><td></td></tr>';
+        echo '<tr><td></td></tr>';
+        echo '<tr></td><input type="submit" value="Update"></td></tr>';
+        echo '</table>';
         echo '</form>';
         ?>
     </body>
